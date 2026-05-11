@@ -107,6 +107,20 @@ class AdvancedAgent:
             prompt_tokens = usage.get('prompt_tokens', 0)
             completion_tokens = usage.get('completion_tokens', 0)
             
+            # 如果API没有返回token信息，使用本地计算
+            if prompt_tokens == 0 or completion_tokens == 0:
+                import re
+                # 计算输入token数
+                prompt_text = ' '.join([msg.get('content', '') for msg in messages])
+                chinese_chars = re.findall(r'[\u4e00-\u9fff]', prompt_text)
+                non_chinese = re.sub(r'[\u4e00-\u9fff]', '', prompt_text)
+                prompt_tokens = len(non_chinese.split()) + len(chinese_chars)
+                # 计算输出token数
+                content_text = content or ''
+                chinese_chars_content = re.findall(r'[\u4e00-\u9fff]', content_text)
+                non_chinese_content = re.sub(r'[\u4e00-\u9fff]', '', content_text)
+                completion_tokens = len(non_chinese_content.split()) + len(chinese_chars_content)
+            
             return content, function_call, {'prompt_tokens': prompt_tokens, 'completion_tokens': completion_tokens}
         
         except Exception as e:

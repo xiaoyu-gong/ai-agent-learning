@@ -35,7 +35,17 @@ def load_env():
     return env_vars
 
 def count_tokens(text):
-    return len(text.split())
+    import re
+    # 对于英文，按空格分割
+    # 对于中文，每个字符算一个token
+    # 对于其他字符，也按字符计算
+    chinese_chars = re.findall(r'[\u4e00-\u9fff]', text)
+    non_chinese = re.sub(r'[\u4e00-\u9fff]', '', text)
+    # 英文按空格分割
+    english_tokens = len(non_chinese.split())
+    # 中文按字符计算
+    chinese_tokens = len(chinese_chars)
+    return english_tokens + chinese_tokens
 
 def call_llm_with_tools(base_url, api_key, model, messages, functions, timeout=30):
     parsed_url = urlparse(base_url)
