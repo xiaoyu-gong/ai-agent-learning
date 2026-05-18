@@ -412,6 +412,121 @@ python practice04/chat_with_anythingllm.py
 
 ---
 
+### Practice 05 — 综合工具调用与对话管理
+
+`practice05/tool_client.py`
+
+将前四个 Practice 的核心能力整合到一个完整的工具调用客户端中，实现了 8 大工具的统一管理和调用。
+
+**集成的工具:**
+
+| 工具名称 | 功能 | 来源 |
+|----------|------|------|
+| `list_directory` | 列出目录内容（含属性） | Practice 02 |
+| `rename_file` | 重命名文件 | Practice 02 |
+| `delete_file` | 删除文件 | Practice 02 |
+| `create_file` | 创建文件并写入内容 | Practice 02 |
+| `read_file` | 读取文件内容 | Practice 02 |
+| `fetch_webpage` | 访问网页获取内容 | Practice 02 |
+| `search_chat_history` | 搜索聊天历史日志 | Practice 04 |
+| `anythingllm_query` | 访问 AnythingLLM 知识库 | Practice 04 |
+
+**新增特性:**
+
+| 特性 | 说明 |
+|------|------|
+| 流式输出 | 普通对话使用 `stream_llm` 实现流式输出 |
+| 非流式工具调用 | 工具调用使用 `call_llm` 确保 Function Calling 稳定性 |
+| 聊天历史压缩 | 每 5 轮或超 3000 字符自动压缩前 70% |
+| 5W 关键信息提取 | 每 5 轮自动提取并记录到 log.txt |
+| /search 命令 | 直接搜索聊天历史日志 |
+
+**运行:**
+```powershell
+python practice05/tool_client.py
+```
+
+> 此代码来源于老师教学仓库 `https://github.com/atfa/2026-Prompt-Course-Practice`
+
+
+---
+
+### Practice 06 — Skill 技能系统
+
+`practice06/tool_client.py`
+
+在 Practice 05 基础上，新增 **Skill 技能系统**，实现技能的热加载与动态调用。Agent 可以自动发现、加载并遵照已安装的 Skill 规则执行任务。
+
+**Skill 目录结构:**
+```
+.agents/
+└── skills/
+    └── notice/           ← notice 技能（撰写通知）
+        └── SKILL.md      ← 包含 YAML front matter + 正文规则
+```
+
+**新增工具:**
+
+| 函数 | 功能 |
+|------|------|
+| `list_available_skills()` | 读取 `.agents/skills/` 下所有 SKILL.md 的 YAML front matter，提取 `name` 和 `description` |
+| `load_skill_content(skill_name)` | 加载指定技能 SKILL.md 的正文内容（YAML front matter 之后的部分） |
+
+**工作流程:**
+```
+用户请求 → list_available_skills (获取技能列表)
+         → LLM 判断匹配的技能
+         → load_skill_content (加载技能正文)
+         → LLM 遵照技能规则执行任务
+```
+
+**SKILL.md 格式 (YAML front matter + Markdown 正文):**
+```markdown
+---
+name: notice
+description: 撰写、修改、润色通知类公文。
+---
+
+# 通知撰写规范
+## 核心规则
+1. 通知标题不能以"通知"二字开头，必须冠以部门前缀
+2. ...
+```
+
+**环境变量适配:**
+`practice06` 自动将项目的 `.env` 变量名映射为老师代码的变量名：
+
+| 你的 .env | → | 代码使用的变量 |
+|-----------|-----|--------------|
+| `LLM_BASE_URL` | → | `BASE_URL` |
+| `LLM_MODEL` | → | `MODEL` |
+| `LLM_API_KEY` | → | `API_KEY` |
+| `LLM_TEMPERATURE` | → | `TEMPERATURE` |
+| `LLM_MAX_TOKENS` | → | `MAX_TOKENS` |
+
+**测试结果:**
+
+| 场景 | 输入 | 期望 | 结果 |
+|------|------|------|------|
+| 场景1 | "帮我写五一放假通知"（未说部门） | `XX部通知` 开头 | ✅ |
+| 场景2 | "我是销售部，帮我写五一放假通知" | `销售部通知` 开头 | ✅ |
+
+**运行:**
+```powershell
+python practice06/tool_client.py
+```
+
+**核心知识点:**
+| 概念 | 说明 |
+|------|------|
+| YAML Front Matter | Markdown 文件头部的 `---` 元数据区域，用于声明技能属性 |
+| Skill 热加载 | 新增技能只需在 `.agents/skills/` 下创建目录 + SKILL.md，无需修改代码 |
+| 技能规则注入 | 技能正文通过 tool call 返回结果注入对话上下文，LLM 遵照执行 |
+| 变量名映射 | 通过 `load_env` 中的映射表，统一不同代码库的配置名差异 |
+
+
+---
+
 ## .env 配置说明
 
 | 变量名 | 说明 | 示例 |
