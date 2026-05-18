@@ -527,6 +527,69 @@ python practice06/tool_client.py
 
 ---
 
+### Practice 07 — 链式工具调用
+
+`practice07/tool_client.py`
+
+在 Practice 06 基础上，新增 **链式工具调用（Chained Tool Calls）** 功能。LLM 可以根据前一步的工具执行结果，自主决定下一步的调用——前一步的输出成为后一步的输入。
+
+**核心组件:**
+
+| 组件 | 功能 |
+|------|------|
+| `ChainedCallContext` | 链式调用上下文管理器，记录每一步的调用和结果，存储中间变量 |
+| `build_analysis_prompt()` | 构建分析提示词，包含用户请求、已执行步骤历史、决策规则和 JSON 输出格式 |
+| `execute_chained_tool_call()` | 链式调用主循环，最多迭代 10 次，支持双格式解析 |
+
+**工作流程:**
+```
+用户请求 → 构建分析提示词
+         → 调用 LLM 决策（JSON 或 tool_calls 格式）
+         → 如果任务完成 → 返回答案
+         → 如果需要继续 → 执行工具 → 记录到上下文 → 下一轮
+         → (最多迭代 10 次)
+```
+
+**双格式支持:**
+
+| 格式 | 说明 | 示例 |
+|------|------|------|
+| JSON 格式 | LLM 在 content 中返回 JSON | `{"done": false, "tool_call": {...}}` 或 `{"done": true, "answer": "..."}` |
+| tool_calls 格式 | OpenAI 标准 Function Calling | 自动转换为链式调用格式 |
+
+**使用方式:**
+```powershell
+# 启动程序
+python practice07/tool_client.py
+
+# 链式调用模式
+> 你: /chain 读取1.txt和2.txt，把两个数相加写入result.txt
+
+# 普通对话模式（直接输入，不需要/chain前缀）
+> 你: 帮我写一份通知
+```
+
+**测试结果:**
+
+| 测试 | 请求 | 工具调用链 | 结果 |
+|------|------|------------|------|
+| 测试1 | 查找 practice06 目录文件并总结 | list_directory → read_file → 总结 | ✅ |
+| 测试2 | 读取 1.txt (123) 和 2.txt (456)，相加写入 result.txt | read_file → read_file → create_file | ✅ (123+456=579) |
+| 测试3 | 访问网页 → 总结 → 保存 summary.txt | fetch_webpage → create_file → read_file | ✅ |
+
+**核心知识点:**
+| 概念 | 说明 |
+|------|------|
+| 链式调用 | 前一个工具的输出作为后一个工具的输入参数 |
+| 上下文管理 | `ChainedCallContext` 记录步骤历史、中间变量、迭代计数 |
+| 双格式解析 | 同时支持 JSON content 和 tool_calls 两种 LLM 响应格式 |
+| Markdown 代码块提取 | 用正则 `re.search(r'```(?:json)?\s*\n?(.*?)\n?```', ...)` 提取 JSON |
+| 防无限循环 | `max_iterations=10` 限制最大迭代次数 |
+| 降级解析 | JSON 解析失败时，用正则从文本中提取 `done`/`answer` 字段 |
+
+
+---
+
 ## .env 配置说明
 
 | 变量名 | 说明 | 示例 |
