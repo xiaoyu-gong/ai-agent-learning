@@ -1,0 +1,139 @@
+digraph G {
+    graph [rankdir=TB, ranksep=0.5, layout=dot, clusterrank="local"];
+    subgraph "cluster_G" {
+
+        graph [style="filled,rounded", fillcolor="#80808018", label=""];
+        "fast_chat" [label="fast_chat", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py"];
+        "llm_stream_chat" [label="llm_stream_chat", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1", tooltip="llm_stream_chat\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\llm_stream_chat.py"];
+        "tool_call_demo" [label="tool_call_demo", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py"];
+        subgraph "cluster_fast_chat" {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="fast_chat"];
+            "fast_chat__TOOLS" [label="TOOLS", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.TOOLS\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:231\nname in fast_chat"];
+            "fast_chat__TOOL_FUNCTIONS" [label="TOOL_FUNCTIONS", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.TOOL_FUNCTIONS\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:220\nname in fast_chat"];
+            "fast_chat___request" [label="_request", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat._request\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:34\nfunction in fast_chat"];
+            "fast_chat___resolve_path" [label="_resolve_path", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat._resolve_path\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:162\nfunction in fast_chat"];
+            "fast_chat__create_file" [label="create_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.create_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:195\nfunction in fast_chat"];
+            "fast_chat__curl_url" [label="curl_url", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.curl_url\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:94\nfunction in fast_chat"];
+            "fast_chat__delete_file" [label="delete_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.delete_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:211\nfunction in fast_chat"];
+            "fast_chat__execute_tool" [label="execute_tool", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.execute_tool\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:351\nfunction in fast_chat"];
+            "fast_chat__get_date" [label="get_date", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.get_date\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:87\nfunction in fast_chat"];
+            "fast_chat__get_weather" [label="get_weather", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.get_weather\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:132\nfunction in fast_chat"];
+            "fast_chat__list_files" [label="list_files", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.list_files\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:171\nfunction in fast_chat"];
+            "fast_chat__load_env" [label="load_env", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.load_env\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:9\nfunction in fast_chat"];
+            "fast_chat__main" [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.main\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:361\nfunction in fast_chat"];
+            "fast_chat__read_file" [label="read_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.read_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:187\nfunction in fast_chat"];
+            "fast_chat__rename_file" [label="rename_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0", tooltip="fast_chat.rename_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\fast_chat.py:203\nfunction in fast_chat"];
+        }
+        subgraph "cluster_llm_stream_chat" {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="llm_stream_chat"];
+            "llm_stream_chat__load_env" [label="load_env", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1", tooltip="llm_stream_chat.load_env\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\llm_stream_chat.py:9\nfunction in llm_stream_chat"];
+            "llm_stream_chat__main" [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1", tooltip="llm_stream_chat.main\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\llm_stream_chat.py:170\nfunction in llm_stream_chat"];
+            "llm_stream_chat__print_banner" [label="print_banner", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1", tooltip="llm_stream_chat.print_banner\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\llm_stream_chat.py:160\nfunction in llm_stream_chat"];
+            "llm_stream_chat__stream_chat" [label="stream_chat", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="1", tooltip="llm_stream_chat.stream_chat\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\llm_stream_chat.py:44\nfunction in llm_stream_chat"];
+        }
+        subgraph "cluster_tool_call_demo" {
+
+            graph [style="filled,rounded", fillcolor="#80808018", label="tool_call_demo"];
+            "tool_call_demo__TOOLS" [label="TOOLS", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.TOOLS\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:329\nname in tool_call_demo"];
+            "tool_call_demo__TOOL_MAP" [label="TOOL_MAP", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.TOOL_MAP\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:304\nname in tool_call_demo"];
+            "tool_call_demo___resolve_path" [label="_resolve_path", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo._resolve_path\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:55\nfunction in tool_call_demo"];
+            "tool_call_demo___safe_filename" [label="_safe_filename", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo._safe_filename\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:66\nfunction in tool_call_demo"];
+            "tool_call_demo__chat_completion_with_tools" [label="chat_completion_with_tools", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.chat_completion_with_tools\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:442\nfunction in tool_call_demo"];
+            "tool_call_demo__create_file" [label="create_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.create_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:154\nfunction in tool_call_demo"];
+            "tool_call_demo__curl_url" [label="curl_url", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.curl_url\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:203\nfunction in tool_call_demo"];
+            "tool_call_demo__delete_file" [label="delete_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.delete_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:133\nfunction in tool_call_demo"];
+            "tool_call_demo__execute_tool" [label="execute_tool", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.execute_tool\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:315\nfunction in tool_call_demo"];
+            "tool_call_demo__get_weather" [label="get_weather", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.get_weather\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:255\nfunction in tool_call_demo"];
+            "tool_call_demo__list_files" [label="list_files", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.list_files\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:73\nfunction in tool_call_demo"];
+            "tool_call_demo__load_env" [label="load_env", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.load_env\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:13\nfunction in tool_call_demo"];
+            "tool_call_demo__main" [label="main", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.main\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:600\nfunction in tool_call_demo"];
+            "tool_call_demo__read_file" [label="read_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.read_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:175\nfunction in tool_call_demo"];
+            "tool_call_demo__rename_file" [label="rename_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.rename_file\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:110\nfunction in tool_call_demo"];
+            "tool_call_demo__run_tool_call_loop" [label="run_tool_call_loop", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="2", tooltip="tool_call_demo.run_tool_call_loop\nC:\Users\WGXY\Documents\trae_projects\XM\practice02\tool_call_demo.py:501\nfunction in tool_call_demo"];
+        }
+    }
+        "fast_chat" -> "fast_chat__TOOLS" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__TOOL_FUNCTIONS" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat___request" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat___resolve_path" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__create_file" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__create_file" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__curl_url" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__curl_url" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__delete_file" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__delete_file" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__execute_tool" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__get_date" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__get_date" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__get_weather" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__get_weather" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__list_files" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__list_files" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__load_env" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__main" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__main" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__read_file" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__read_file" [style="solid",  color="#000000"];
+        "fast_chat" -> "fast_chat__rename_file" [style="dashed",  color="#838b8b"];
+        "fast_chat" -> "fast_chat__rename_file" [style="solid",  color="#000000"];
+        "fast_chat__create_file" -> "fast_chat___resolve_path" [style="solid",  color="#000000"];
+        "fast_chat__delete_file" -> "fast_chat___resolve_path" [style="solid",  color="#000000"];
+        "fast_chat__execute_tool" -> "fast_chat__TOOL_FUNCTIONS" [style="solid",  color="#000000"];
+        "fast_chat__list_files" -> "fast_chat___resolve_path" [style="solid",  color="#000000"];
+        "fast_chat__main" -> "fast_chat__TOOLS" [style="solid",  color="#000000"];
+        "fast_chat__main" -> "fast_chat___request" [style="solid",  color="#000000"];
+        "fast_chat__main" -> "fast_chat__execute_tool" [style="solid",  color="#000000"];
+        "fast_chat__main" -> "fast_chat__load_env" [style="solid",  color="#000000"];
+        "fast_chat__read_file" -> "fast_chat___resolve_path" [style="solid",  color="#000000"];
+        "fast_chat__rename_file" -> "fast_chat___resolve_path" [style="solid",  color="#000000"];
+        "llm_stream_chat" -> "llm_stream_chat__load_env" [style="dashed",  color="#838b8b"];
+        "llm_stream_chat" -> "llm_stream_chat__main" [style="dashed",  color="#838b8b"];
+        "llm_stream_chat" -> "llm_stream_chat__main" [style="solid",  color="#000000"];
+        "llm_stream_chat" -> "llm_stream_chat__print_banner" [style="dashed",  color="#838b8b"];
+        "llm_stream_chat" -> "llm_stream_chat__stream_chat" [style="dashed",  color="#838b8b"];
+        "llm_stream_chat__main" -> "llm_stream_chat__load_env" [style="solid",  color="#000000"];
+        "llm_stream_chat__main" -> "llm_stream_chat__print_banner" [style="solid",  color="#000000"];
+        "llm_stream_chat__main" -> "llm_stream_chat__stream_chat" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__TOOLS" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__TOOL_MAP" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo___resolve_path" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo___safe_filename" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__chat_completion_with_tools" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__create_file" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__create_file" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__curl_url" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__curl_url" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__delete_file" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__delete_file" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__execute_tool" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__get_weather" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__get_weather" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__list_files" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__list_files" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__load_env" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__main" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__main" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__read_file" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__read_file" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__rename_file" [style="dashed",  color="#838b8b"];
+        "tool_call_demo" -> "tool_call_demo__rename_file" [style="solid",  color="#000000"];
+        "tool_call_demo" -> "tool_call_demo__run_tool_call_loop" [style="dashed",  color="#838b8b"];
+        "tool_call_demo__create_file" -> "tool_call_demo___resolve_path" [style="solid",  color="#000000"];
+        "tool_call_demo__create_file" -> "tool_call_demo___safe_filename" [style="solid",  color="#000000"];
+        "tool_call_demo__delete_file" -> "tool_call_demo___resolve_path" [style="solid",  color="#000000"];
+        "tool_call_demo__delete_file" -> "tool_call_demo___safe_filename" [style="solid",  color="#000000"];
+        "tool_call_demo__execute_tool" -> "tool_call_demo__TOOL_MAP" [style="solid",  color="#000000"];
+        "tool_call_demo__list_files" -> "tool_call_demo___resolve_path" [style="solid",  color="#000000"];
+        "tool_call_demo__main" -> "tool_call_demo__TOOLS" [style="solid",  color="#000000"];
+        "tool_call_demo__main" -> "tool_call_demo__TOOL_MAP" [style="solid",  color="#000000"];
+        "tool_call_demo__main" -> "tool_call_demo__load_env" [style="solid",  color="#000000"];
+        "tool_call_demo__main" -> "tool_call_demo__run_tool_call_loop" [style="solid",  color="#000000"];
+        "tool_call_demo__read_file" -> "tool_call_demo___resolve_path" [style="solid",  color="#000000"];
+        "tool_call_demo__read_file" -> "tool_call_demo___safe_filename" [style="solid",  color="#000000"];
+        "tool_call_demo__rename_file" -> "tool_call_demo___resolve_path" [style="solid",  color="#000000"];
+        "tool_call_demo__rename_file" -> "tool_call_demo___safe_filename" [style="solid",  color="#000000"];
+        "tool_call_demo__run_tool_call_loop" -> "tool_call_demo__chat_completion_with_tools" [style="solid",  color="#000000"];
+        "tool_call_demo__run_tool_call_loop" -> "tool_call_demo__execute_tool" [style="solid",  color="#000000"];
+    }
