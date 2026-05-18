@@ -350,6 +350,66 @@ python practice04/chat_with_log.py
 > **设计思路**：在真实 Agent 应用中，用户可能几天后回来继续对话。通过 5W 日志持久化到磁盘 + 搜索功能，Agent 获得了"长期记忆"能力——可以回顾历史对话中的关键信息，而不需要把所有对话都保存在上下文窗口中。
 
 
+### Practice 04 附加 — AnythingLLM 知识库集成
+
+`practice04/chat_with_anythingllm.py`
+
+在 Practice 03 基础上，新增 **AnythingLLM 本地知识库查询**功能，让 Agent 能够访问用户在 AnythingLLM 中构建的文档仓库，实现 RAG（检索增强生成）。
+
+**核心功能：**
+
+| 特性 | 说明 |
+|------|------|
+| 查询 API | 通过 `subprocess` + `curl` 调用 AnythingLLM 的 `/api/v1/workspace/{slug}/chat` 接口 |
+| 认证方式 | Bearer Token 认证（`ANYTHINGLLM_API_KEY`） |
+| 中文编码 | 使用 `ensure_ascii=False` + UTF-8 正确处理中文 |
+| 触发方式 | 用户提到「文档仓库」「文件仓库」「仓库」「知识库」时自动触发 |
+
+**配置要求 (.env):**
+```
+ANYTHINGLLM_API_KEY=your-anythingllm-api-key
+ANYTHINGLLM_WORKSPACE_SLUG=your-workspace-slug
+```
+
+**运行:**
+```powershell
+python practice04/chat_with_anythingllm.py
+```
+
+**运行效果:**
+```
+=======================================================
+  📚 Practice 04 - AnythingLLM 知识库集成
+  模型: qwen/qwen2.5-vl-7b
+  AnythingLLM: 已配置 ✅
+  工作区: my-workspace
+  压缩阈值: >5轮 或 >3000字符
+=======================================================
+
+[You] > 我的文档仓库里有什么内容
+
+  🔧 调用工具: anythingllm_query
+     参数: {'message': '我的文档仓库里有什么内容', 'mode': 'chat'}
+     结果:
+     根据你的文档仓库，目前包含以下内容：...
+
+  📚 参考来源:
+    • anythingllm.txt
+    • project-doc.pdf
+```
+
+**API 文档查阅:** 遇到错误可在浏览器打开 `http://localhost:3001/api/docs/` 查看完整 API 文档。
+
+**核心知识点:**
+| 概念 | 说明 |
+|------|------|
+| RAG (检索增强生成) | 从本地知识库检索相关文档后再由 LLM 生成回答 |
+| AnythingLLM | 开源的本地知识库/RAG 平台，支持多种文档格式 |
+| subprocess + curl | 使用系统原生 HTTP 工具，避免依赖第三方库 |
+| 中文编码处理 | `ensure_ascii=False` 保证 JSON 中中文不转义为 `\uXXXX` |
+| 外部工具集成 | Agent 通过 Function Calling 打通外部知识库 |
+
+
 ---
 
 ## .env 配置说明
