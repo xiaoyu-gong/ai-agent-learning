@@ -82,6 +82,9 @@ logs/
 *.sqlite
 *.sqlite3
 
+# Generated output
+article-output/
+
 # API keys and secrets
 secrets/
 *.pem

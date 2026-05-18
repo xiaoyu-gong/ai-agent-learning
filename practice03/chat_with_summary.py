@@ -217,6 +217,52 @@ def delete_file(directory: str, filename: str) -> str:
     return f"删除成功: {filename}"
 
 
+SKILLS_DIR = os.path.join(BASE_DIR, "skills")
+
+
+def init_article(topic: str, document_type: str = "软件工程报告") -> str:
+    try:
+        skill_path = os.path.join(SKILLS_DIR, "init-article")
+        if not os.path.exists(skill_path):
+            return f"[错误] 未找到 init-article skill，请先安装"
+
+        assets_path = os.path.join(skill_path, "assets")
+        if not os.path.exists(assets_path):
+            return f"[错误] skill 目录结构不完整"
+
+        output_dir = os.path.join(BASE_DIR, "article-output")
+        os.makedirs(output_dir, exist_ok=True)
+
+        templates = {
+            "topic.md": "topic-example.md",
+            "voice.md": "voice-example.md",
+            "structure.md": "structure-example.md",
+            "check.md": "check-example.md",
+        }
+
+        created_files = []
+        for output_name, template_name in templates.items():
+            template_path = os.path.join(assets_path, template_name)
+            output_path = os.path.join(output_dir, output_name)
+
+            with open(template_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            content = content.replace("[在此填入文档的核心命题，一句话概括]", topic)
+            content = content.replace("[描述预期读者画像，影响内容深度与术语使用]", 
+                                   f"文档类型: {document_type}")
+
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(content)
+
+            created_files.append(output_name)
+
+        return f"✅ 文章初始化完成！\n\n创建的约束规则文件:\n\n" + "\n".join([f"  • {f}" for f in created_files]) + f"\n\n输出目录: {output_dir}\n\n📝 四个约束规则文件已创建:\n  1. topic.md - 主题锚定（写什么，防止跑题）\n  2. voice.md - 语气风格（怎么写，设定语气）\n  3. structure.md - 文档结构（写成什么样）\n  4. check.md - 质量检查（写完后查什么）"
+
+    except Exception as e:
+        return f"[错误] 初始化失败: {str(e)}"
+
+
 TOOL_FUNCTIONS = {
     "get_date": get_date,
     "curl_url": curl_url,
@@ -226,6 +272,7 @@ TOOL_FUNCTIONS = {
     "create_file": create_file,
     "rename_file": rename_file,
     "delete_file": delete_file,
+    "init_article": init_article,
 }
 
 TOOLS = [
@@ -342,6 +389,22 @@ TOOLS = [
                     "filename": {"type": "string", "description": "要删除的文件名"}
                 },
                 "required": ["directory", "filename"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "init_article",
+            "description": "初始化文章写作，根据用户需求创建四个约束规则文件：topic.md（写什么）、voice.md（怎么写）、structure.md（写成什么样）、check.md（写完后查什么）。用于帮助用户规范文档写作流程。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "topic": {"type": "string", "description": "文章主题，一句话概括"},
+                    "document_type": {"type": "string", "description": "文档类型，如：软件工程报告、读书心得、入党申请书等"}
+                },
+                "required": ["topic"],
+                "optional": ["document_type"]
             }
         }
     },
