@@ -1,3 +1,21 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
 # Python virtual environment
 venv/
 .venv/
@@ -51,20 +69,8 @@ coverage.xml
 .env.*
 !.env.example
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.project
-.pydevproject
-.settings/
-
-# OS
-Thumbs.db
-.DS_Store
-Desktop.ini
+# Node
+node_modules/
 
 # AI / LLM related
 *.bin
@@ -73,20 +79,5 @@ Desktop.ini
 models/
 checkpoints/
 
-# Logs
+# Misc
 *.log
-logs/
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Generated output
-article-output/
-
-# API keys and secrets
-secrets/
-*.pem
-*.key
-credentials.json
